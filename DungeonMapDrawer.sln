@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonMapDrawer.Tests", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonMapGenerator", "DungeonMapGenerator\DungeonMapGenerator.csproj", "{639273AB-7D4E-471D-8167-0C31A7C22A5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonMapGenerator.Tests", "DungeonMapGenerator.Tests\DungeonMapGenerator.Tests.csproj", "{A5C80542-F598-4785-BFE1-53E8EE56365D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{3CA9316B-EC62-4736-838E-0642BDBC1ABC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +31,16 @@ Global
 		{639273AB-7D4E-471D-8167-0C31A7C22A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{639273AB-7D4E-471D-8167-0C31A7C22A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{639273AB-7D4E-471D-8167-0C31A7C22A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5C80542-F598-4785-BFE1-53E8EE56365D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5C80542-F598-4785-BFE1-53E8EE56365D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5C80542-F598-4785-BFE1-53E8EE56365D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5C80542-F598-4785-BFE1-53E8EE56365D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AEDA7ED0-5848-4A35-A8E2-694DD32B6B0C} = {3CA9316B-EC62-4736-838E-0642BDBC1ABC}
+		{A5C80542-F598-4785-BFE1-53E8EE56365D} = {3CA9316B-EC62-4736-838E-0642BDBC1ABC}
 	EndGlobalSection
 EndGlobal
