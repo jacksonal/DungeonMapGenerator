@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DungeonMapGenerator.Model
 {
@@ -17,18 +18,37 @@ namespace DungeonMapGenerator.Model
 
         public int TileWidth { get { return GetMapWidth(); } }
 
-        public MapSize Size { get; }
+        public MapSize Size { get; set; }
         public IEnumerable<IRoom> Rooms { get; }
+
+        public Map()
+        {
+            Rooms = new List<IRoom>();
+        }
 
         private int GetMapWidth()
         {
-            throw new System.NotImplementedException();
+            return SizeToInt();
         }
 
         private int GetMapHeight()
         {
-            throw new System.NotImplementedException();
+            return SizeToInt();
+        }
+
+        private int SizeToInt()
+        {
+            switch (Size)
+            {
+                case MapSize.Small:
+                    return 10;
+                case MapSize.Medium:
+                    return 20;
+                case MapSize.Large:
+                    return 40;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
-
 }
