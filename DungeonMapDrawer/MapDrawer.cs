@@ -1,4 +1,6 @@
-﻿namespace DungeonMapDrawer
+﻿using System.Drawing;
+
+namespace DungeonMapDrawer
 {
     public class MapDrawer
     {
@@ -21,6 +23,10 @@
             _mapTileWidth = width > 0 ? width : height;
         }
 
-        
+
+        public Bitmap DrawMap()
+        {
+            return new Bitmap(PixelWidth,PixelHeight);
+        }
     }
 }
