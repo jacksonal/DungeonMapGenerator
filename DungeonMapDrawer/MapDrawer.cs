@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using DungeonMapGenerator.Model;
 
 namespace DungeonMapDrawer
 {
@@ -25,8 +26,22 @@ namespace DungeonMapDrawer
 
 
         public Bitmap DrawMap()
+
         {
-            return new Bitmap(PixelWidth,PixelHeight);
+            var ret = new Bitmap(PixelWidth,PixelHeight);
+            using (var mapGraphics = Graphics.FromImage(ret))
+            {
+                mapGraphics.FillRectangle(Brushes.Black,0,0,PixelWidth,PixelHeight);
+                mapGraphics.Flush();
+            }
+            return ret;
+        }
+
+        public Bitmap DrawMap(IMap map)
+        {
+            SetTileSize(10);
+            SetMapTileDimensions(map.TileHeight,map.TileWidth);
+            return DrawMap();
         }
     }
 }

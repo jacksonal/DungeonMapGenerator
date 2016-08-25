@@ -1,4 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System.Drawing;
+using System.Globalization;
+using DungeonMapGenerator.Model;
+using Moq;
+using NUnit.Framework;
 
 namespace DungeonMapDrawer.Tests
 {
@@ -40,6 +44,24 @@ namespace DungeonMapDrawer.Tests
             Assert.AreEqual(100, image.Size.Width);
         }
 
+        [Test]
+        public void DrawMap_PixelFillerIsBlack()
+        {
+            SetMapSize(10, 10);
+
+            var image = _systemUnderTest.DrawMap();
+            Assert.AreEqual(Color.Black.ToArgb(),image.GetPixel(0,0).ToArgb());
+        }
+
+        [Test]
+        public void DrawMap_WithMapAsArg_PixelFillerIsBlack()
+        {
+            Mock<IMap> map = new Mock<IMap>();
+            map.Setup(m => m.TileHeight).Returns(10);
+            map.Setup(m => m.TileWidth).Returns(10);
+            var image = _systemUnderTest.DrawMap(map.Object);
+            Assert.AreEqual(Color.Black.ToArgb(), image.GetPixel(0, 0).ToArgb());
+        }
         private void SetMapSize(int tilePixels, int mapTiles)
         {
             _systemUnderTest.SetTileSize(tilePixels);
