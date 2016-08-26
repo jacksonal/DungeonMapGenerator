@@ -22,5 +22,12 @@ namespace DungeonMapGenerator.Tests
             Assert.Greater(_systemUnderTest.TileHeight,0);
             Assert.Greater(_systemUnderTest.TileWidth, 0);
         }
+
+        [Test]
+        public void AddRoom_RoomInCollection()
+        {
+            _systemUnderTest.AddRoom(new Room());
+            Assert.IsNotEmpty(_systemUnderTest.Rooms);
+        }
     }
 }

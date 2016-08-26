@@ -65,13 +65,13 @@ namespace DungeonMapDrawer.Tests
             Assert.AreEqual(Color.Black.ToArgb(), image.GetPixel(0, 0).ToArgb());
         }
 
-        [Test,Ignore]
+        [Test]
         public void DrawMap_MapHasRoom_RoomMarkedWhite()
         {
             var map = GetMockMap();
             var image = _systemUnderTest.DrawMap(map.Object);
-            var roomPixel = image.GetPixel(image.Height - (10*map.Object.Rooms.First().YCoord),
-                image.Width - (10*map.Object.Rooms.First().XCoord));
+            var roomPixel = image.GetPixel(10*map.Object.Rooms.First().XCoord,
+                10*map.Object.Rooms.First().YCoord);
             Assert.AreEqual(Color.White.ToArgb(),roomPixel.ToArgb());
         }
 

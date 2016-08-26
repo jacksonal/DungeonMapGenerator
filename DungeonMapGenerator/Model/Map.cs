@@ -14,16 +14,17 @@ namespace DungeonMapGenerator.Model
 
     public class Map : IMap
     {
+        private IList<IRoom> _rooms;
         public int TileHeight { get { return GetMapHeight(); } }
 
         public int TileWidth { get { return GetMapWidth(); } }
 
         public MapSize Size { get; set; }
-        public IEnumerable<IRoom> Rooms { get; }
+        public IEnumerable<IRoom> Rooms { get { return _rooms; } }
 
         public Map()
         {
-            Rooms = new List<IRoom>();
+            _rooms = new List<IRoom>();
         }
 
         private int GetMapWidth()
@@ -49,6 +50,11 @@ namespace DungeonMapGenerator.Model
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        public void AddRoom(IRoom room)
+        {
+            _rooms.Add(room);
         }
     }
 }
