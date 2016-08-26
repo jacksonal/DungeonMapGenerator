@@ -55,6 +55,10 @@
       <Project>{470466AC-BB46-4694-AC4A-28024C7CB37B}</Project>
       <Name>DungeonMapDrawer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DungeonMapGenerator\DungeonMapGenerator.csproj">
+      <Project>{639273AB-7D4E-471D-8167-0C31A7C22A5D}</Project>
+      <Name>DungeonMapGenerator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

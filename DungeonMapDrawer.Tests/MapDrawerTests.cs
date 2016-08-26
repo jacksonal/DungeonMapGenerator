@@ -1,5 +1,7 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using DungeonMapGenerator.Model;
 using Moq;
 using NUnit.Framework;
@@ -20,26 +22,28 @@ namespace DungeonMapDrawer.Tests
         [Test]
         public void GivenDimensionsAndTilePixelSize_MapSizeCorrect()
         {
-            SetMapSize(10,10);
+            var map = GetMockMap();
 
-            Assert.AreEqual(100, _systemUnderTest.PixelHeight);
-            Assert.AreEqual(100, _systemUnderTest.PixelWidth);
+            var image = _systemUnderTest.DrawMap(map.Object);
+
+            Assert.AreEqual(100, image.Height);
+            Assert.AreEqual(100, image.Width);
         }
 
         [Test]
         public void DrawMap_GivenDimensionsAndTilePixelSize_ImageCreated()
         {
-            SetMapSize(10,10);
+            var map = GetMockMap();
 
-            Assert.IsNotNull(_systemUnderTest.DrawMap());
+            Assert.IsNotNull(_systemUnderTest.DrawMap(map.Object));
         }
 
         [Test]
         public void DrawMap_GivenDimensionsAndTilePixelSize_ImageSizeCorrect()
         {
-            SetMapSize(10, 10);
+            var map = GetMockMap();
 
-            var image = _systemUnderTest.DrawMap();
+            var image = _systemUnderTest.DrawMap(map.Object);
             Assert.AreEqual(100, image.Size.Height);
             Assert.AreEqual(100, image.Size.Width);
         }
@@ -47,25 +51,40 @@ namespace DungeonMapDrawer.Tests
         [Test]
         public void DrawMap_PixelFillerIsBlack()
         {
-            SetMapSize(10, 10);
+            var map = GetMockMap();
 
-            var image = _systemUnderTest.DrawMap();
+            var image = _systemUnderTest.DrawMap(map.Object);
             Assert.AreEqual(Color.Black.ToArgb(),image.GetPixel(0,0).ToArgb());
         }
 
         [Test]
         public void DrawMap_WithMapAsArg_PixelFillerIsBlack()
         {
-            Mock<IMap> map = new Mock<IMap>();
-            map.Setup(m => m.TileHeight).Returns(10);
-            map.Setup(m => m.TileWidth).Returns(10);
+            var map = GetMockMap();
             var image = _systemUnderTest.DrawMap(map.Object);
             Assert.AreEqual(Color.Black.ToArgb(), image.GetPixel(0, 0).ToArgb());
         }
-        private void SetMapSize(int tilePixels, int mapTiles)
+
+        [Test,Ignore]
+        public void DrawMap_MapHasRoom_RoomMarkedWhite()
         {
-            _systemUnderTest.SetTileSize(tilePixels);
-            _systemUnderTest.SetMapTileDimensions(mapTiles);
+            var map = GetMockMap();
+            var image = _systemUnderTest.DrawMap(map.Object);
+            var roomPixel = image.GetPixel(image.Height - (10*map.Object.Rooms.First().YCoord),
+                image.Width - (10*map.Object.Rooms.First().XCoord));
+            Assert.AreEqual(Color.White.ToArgb(),roomPixel.ToArgb());
+        }
+
+        private Mock<IMap> GetMockMap()
+        {
+            Mock<IMap> map = new Mock<IMap>();
+            map.Setup(m => m.TileHeight).Returns(10);
+            map.Setup(m => m.TileWidth).Returns(10);
+            map.Setup(m => m.Rooms).Returns(new List<Room>
+            {
+                new Room {Height = 4, Width = 4, XCoord = 3, YCoord = 3}
+            });
+            return map;
         }
     }
 }

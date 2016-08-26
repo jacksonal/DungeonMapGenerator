@@ -1,4 +1,5 @@
 ﻿using DungeonMapDrawer;
+using DungeonMapGenerator.Model;
 
 namespace TestHarness
 {
@@ -7,9 +8,8 @@ namespace TestHarness
         static void Main(string[] args)
         {
             var drawer = new MapDrawer();
-            drawer.SetTileSize(50);
-            drawer.SetMapTileDimensions(20);
-            var mapImage = drawer.DrawMap();
+            var map = new Map {Size = MapSize.Large};
+            var mapImage = drawer.DrawMap(map);
             mapImage.Save("map.png");
         }
     }
