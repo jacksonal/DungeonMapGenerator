@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MapValidator.cs" />
     <Compile Include="Model\Map.cs" />
     <Compile Include="Model\MapSize.cs" />
     <Compile Include="Model\Room.cs" />
